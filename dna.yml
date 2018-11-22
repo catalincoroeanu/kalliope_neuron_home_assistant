@@ -1,0 +1,11 @@
+---
+  name: "Home Assistant"
+  type: "neuron"
+  author: "https://github.com/royto/"
+
+  kalliope_supported_version:
+    - 0.5
+
+  tags:
+    - "Home Assistant"
+    - "Home automation"
