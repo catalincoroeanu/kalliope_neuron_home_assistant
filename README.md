@@ -106,7 +106,7 @@ State value and associated attributes
 
 Response Example
 
-```json
+```python
 {
    'elevation': -52.58,
    'next_noon': '2018-11-23T11:23:06+00:00', 'friendly_name': 'Sun',
