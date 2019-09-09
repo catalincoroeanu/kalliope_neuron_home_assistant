@@ -85,10 +85,10 @@ Allows to get thermostat status
 
 State value and associated attributes
 
-| Name    | Description                                                          | Type   | sample        |
-|---------|----------------------------------------------------------------------|--------|---------------|
-| state | State value | depend of state | 12 |
-| `attributeName` | Name of the attribute ||
+| Name            | Description     | Type                | sample |
+|-----------------|-----------------|---------------------|--------|
+| state           | State value     | depend of state     | 12     |
+| `attributeName` | Attribute value | depend of attribute | on     |
 
 #### Synapses example
 
@@ -102,6 +102,8 @@ State value and associated attributes
           token: XXX
           action: GET_STATE
           stateId: sun.sun
+          say_template:
+            - "The sun elevation is {{elevation}}"
 ```
 
 Response Example
