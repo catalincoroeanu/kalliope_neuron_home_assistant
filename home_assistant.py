@@ -25,7 +25,7 @@ class Home_assistant(NeuronModule):
 
         # parameters
         self.url = kwargs.get('url', None)
-        self.password = kwargs.get('password', None)
+        self.token = kwargs.get('token', None)
         self.action = kwargs.get('action', None) 
         self.stateId = kwargs.get('stateId', None)
         self.domain = kwargs.get('domain', None)
@@ -52,7 +52,7 @@ class Home_assistant(NeuronModule):
         logger.debug("Get state %s", stateId)
 
         headers = {
-            "X-HA-Access": self.password
+            "Authorization": "Bearer " + self.token
         }
         url = urljoin(self.url, '/api/states/{}'.format(stateId))
         r = requests.get(url, headers=headers)
@@ -66,10 +66,10 @@ class Home_assistant(NeuronModule):
 
     def call_service(self, domain, service, service_data):
 
-        logger.debug("Call service %s %s", domain, service)
+        logger.debug("Calling service %s %s", domain, service)
         payload = service_data
         headers = {
-            "X-HA-Access": self.password
+            "Authorization": "Bearer " + self.token
         }
         url = urljoin(self.url, '/api/services/{}/{}'.format(domain, service))
         r = requests.post(url, headers=headers, json=payload)
@@ -85,8 +85,8 @@ class Home_assistant(NeuronModule):
         """
         if self.url is None:
             raise MissingParameterException("Home assistant needs an URL")
-        if self.password is None:
-            raise MissingParameterException("Home assistant needs a password")
+        if self.token is None:
+            raise MissingParameterException("Home assistant needs a token")
         if self.action is None:
             raise MissingParameterException("Home assistant needs an action")    
         return True

@@ -12,7 +12,7 @@ kalliope install --git-url https://github.com/royto/kalliope_neuron_home_assista
 
 ## Prerequisites
 
-The [http component](https://www.home-assistant.io/components/http/) need to be configured with an api_password to enforce security
+A [long lived access token](https://developers.home-assistant.io/docs/en/auth_api.html#long-lived-access-token) has to be generated. Long lived access token can be generated from your Home assistant profile page.
 
 ## CALL SERVICE
 
@@ -20,13 +20,13 @@ Allows to call a home assistant service
 
 ### Options
 
-| parameter   | required | type   | default | choices    | comment                              |
-|-------------|----------|--------|---------|------------|--------------------------------------|
-| url         | YES      | String | None    |            | url of your home assistant instance with port     |
-| password    | YES      | String | None    |   |the configured api_password |
-| domain    | YES      | String | None    |   |the domain of the service |
-| service    | YES      | String | None    |   |the service to call|
-| service_data    | NO      | dict | None    |   |the service data|
+| parameter    | required | type   | default | choices    | comment                              |
+|--------------|----------|--------|---------|------------|--------------------------------------|
+| url          | YES      | String | None    |            | url of your home assistant instance with port     |
+| token        | YES      | String | None    |            | the long lived access token |
+| domain       | YES      | String | None    |            | the domain of the service |
+| service      | YES      | String | None    |            | the service to call|
+| service_data | NO       | dict   | None    |            | the service data|
 
 #### Return Values
 
@@ -46,7 +46,7 @@ Example without service_data : Restart home assistant
     neurons:
       - home_assistant:
           url: "http://192.168.0.1:8123"
-          password: XXXX
+          token: XXXX
           action: CALL_SERVICE
           domain: homeassistant
           service: restart
@@ -61,7 +61,7 @@ Example with service_data : Locate Vacuum
     neurons:
       - home_assistant:
           url: "http://192.168.0.1:8123"
-          password: XXX
+          token: XXX
           action: CALL_SERVICE
           domain: vacuum
           service: locate
@@ -78,8 +78,8 @@ Allows to get thermostat status
 | parameter   | required | type   | default | choices    | comment                              |
 |-------------|----------|--------|---------|------------|--------------------------------------|
 | url         | YES      | String | None    |            | url of your home assistant instance with port     |
-| password    | YES      | String | None    |   |the configured api_password |
-| stateId    | YES      | String | None    |   |Id of the state |
+| token       | YES      | String | None    |            | the long lived access token |
+| stateId     | YES      | String | None    |            |Id of the state |
 
 #### Return Values
 
@@ -99,7 +99,7 @@ State value and associated attributes
     neurons:
       - home_assistant:
           url: "http://192.168.1.1:8123"
-          password: XXX
+          token: XXX
           action: GET_STATE
           stateId: sun.sun
 ```
